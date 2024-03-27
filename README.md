@@ -1,20 +1,19 @@
-# Title
-Creating a Detailed Running Pace Calculator 
+# Creating a Detailed Running Pace Calculator 
 
-# Team Members 
+## Team Members 
 Tyler and Noah
 
-# Team Name
+## Team Name
 Team Running Calculator 
 
-# Description 
+## Description 
 
 
-# Why We Chose This Project
+## Why We Chose This Project
 
 
-# Inspiration Behind This Project
+## Inspiration Behind This Project
 
 
-# Implementation / Responsibility Plan
+## Implementation / Responsibility Plan
 
