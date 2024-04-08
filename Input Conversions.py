@@ -20,16 +20,16 @@ def distance_convert(distance_input, units_input_distance):
 
 
 def pace_convert(pace_input_minutes, pace_input_seconds, units_input_pace):
-    pace_seconds = time_convert(0, pace_input_minutes, pace_input_seconds)
-    pace_minutes = pace_seconds / 60
+    pace_in_seconds_per_km = time_convert(0, pace_input_minutes, pace_input_seconds)
     if units_input_pace == "per mi":
-        pace_final_km = pace_minutes * 1.609
+        pace_in_seconds_per_km = pace_in_seconds_per_km * 0.62137119223733
     if units_input_pace == "per km":
-        pace_final_km = pace_input
+        pace_in_seconds_per_km = pace_in_seconds_per_km
+    return pace_in_seconds_per_km
 
 
 
 
-
+print(pace_convert(4,30, "per mi"))
 
 
