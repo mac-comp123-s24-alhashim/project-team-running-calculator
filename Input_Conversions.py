@@ -29,7 +29,7 @@ def pace_convert(pace_input_minutes, pace_input_seconds, units_input_pace):
 
 
 
-
-print(pace_convert(4,30, "per mi"))
+if __name__ == "__main__":
+    print(pace_convert(4,30, "per mi"))
 
 
