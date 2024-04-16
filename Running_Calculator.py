@@ -10,7 +10,7 @@ class First_Window_GUI:
         self.userMinPace = tk.StringVar()
         self.userSecPace = tk.StringVar()
         self.userDistance = tk.StringVar()
-    
+
 
 
 
