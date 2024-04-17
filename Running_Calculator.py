@@ -99,7 +99,7 @@ class First_Window_GUI:
             paceUnitsKm = self.paceUnitsKm.get()
 
             if hourTime and minTime and secTime == "":
-                
+
 
 
 
