@@ -31,5 +31,6 @@ def pace_convert(pace_input_minutes, pace_input_seconds, units_input_pace):
 
 if __name__ == "__main__":
     print(pace_convert(4,30, "per mi"))
+    print(distance_convert(1, "mi"))
 
 

@@ -24,6 +24,7 @@ class First_Window_GUI:
 
 
 
+
     def createWidgets(self):
         self.root.title('Running Calculator')
 
@@ -83,22 +84,52 @@ class First_Window_GUI:
         self.pace_per_mi_button.select()
         self.pace_per_km_button.deselect()
 
-        def calculations(self):
-            hourTime = self.userHourTime.get()
-            minTime = self.userMinTime.get()
-            secTime = self.userSecTime.get()
+        self.submitButton = tk.Button(self.root, text="Submit", command=self.calculations)
+        self.submitButton.grid(row=20, column=5)
 
-            distance = self.userDistance.get()
-            distanceUnitsMi = self.distanceUnitsMi.get()
-            distanceUnitsKm = self.distanceUnitsKm.get()
-            distanceUnitsM = self.distanceUnitsM.get()
+    def calculations(self):
+        hourTime = self.userHourTime.get()
+        minTime = self.userMinTime.get()
+        secTime = self.userSecTime.get()
 
-            minPace = self.userMinPace.get()
-            secPace = self.userSecPace.get()
-            paceUnitsMi = self.paceUnitsMi.get()
-            paceUnitsKm = self.paceUnitsKm.get()
+        distance = float(self.userDistance.get())
+        distanceUnitsMi = self.distanceUnitsMi.get()
+        distanceUnitsKm = self.distanceUnitsKm.get()
+        distanceUnitsM = self.distanceUnitsM.get()
 
-            if hourTime and minTime and secTime == "":
+        minPace = float(self.userMinPace.get())
+        secPace = float(self.userSecPace.get())
+        paceUnitsMi = self.paceUnitsMi.get()
+        paceUnitsKm = self.paceUnitsKm.get()
+
+        distanceUnits = ''
+        paceUnits = ''
+
+        if distanceUnitsMi == 'yes':
+            distanceUnits = "mi"
+
+        if distanceUnitsKm == 'yes':
+            distanceUnits = "km"
+
+        if distanceUnitsM == 'yes':
+            distanceUnits = "m"
+
+        if paceUnitsMi == 'yes':
+            paceUnits = "per mi"
+
+        if paceUnitsKm =='yes':
+            paceUnits = "per km"
+
+        if hourTime + minTime + secTime == '':
+            distance_in_meters = distance_convert(distance, distanceUnits)
+            pace_in_sec_per_km = pace_convert(minPace, secPace, paceUnits)
+            final_pace = (pace_in_sec_per_km * (distance_in_meters / 1000))
+            if paceUnits == "per mi":
+                final_pace = final_pace * 1.60934
+            elif paceUnits == "per km":
+                final_pace = final_pace
+            print(final_pace)
+
 
 
 
