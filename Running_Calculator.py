@@ -83,6 +83,25 @@ class First_Window_GUI:
         self.pace_per_mi_button.select()
         self.pace_per_km_button.deselect()
 
+        def calculations(self):
+            hourTime = self.userHourTime.get()
+            minTime = self.userMinTime.get()
+            secTime = self.userSecTime.get()
+
+            distance = self.userDistance.get()
+            distanceUnitsMi = self.distanceUnitsMi.get()
+            distanceUnitsKm = self.distanceUnitsKm.get()
+            distanceUnitsM = self.distanceUnitsM.get()
+
+            minPace = self.userMinPace.get()
+            secPace = self.userSecPace.get()
+            paceUnitsMi = self.paceUnitsMi.get()
+            paceUnitsKm = self.paceUnitsKm.get()
+
+            if hourTime and minTime and secTime == "":
+                
+
+
 
 
 
