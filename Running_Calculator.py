@@ -28,34 +28,28 @@ class First_Window_GUI:
     def createWidgets(self):
         self.root.title('Running Calculator')
 
-        self.welcome = tk.Label(master=self.root, text="Tyler and Noah's Running Calculator",
-                           font='Arial 20 bold', bd=10, relief='groove')
+        self.welcome = tk.Label(master=self.root, text="Tyler and Noah's Running Calculator", font='Arial 20 bold', bd=10, relief='groove')
         self.welcome.grid(row=0, columnspan=12)
 
-        self.instruction_1 = tk.Label(master=self.root, text="Fill in 2 of the below cells",
-                                 font='Arial 10', bd=5, relief='groove')
+        self.instruction_1 = tk.Label(master=self.root, text="Fill in 2 of the below cells", font='Arial 10', bd=5, relief='groove')
         self.instruction_1.grid(row=1, column=2, columnspan=4)
 
-        self.time_frame = tk.Frame(self.root, bg="black", bd=1,
-                              relief='groove', padx=0, pady=0)
+        self.time_frame = tk.Frame(self.root, bg="black", bd=1, relief='groove', padx=0, pady=0)
         self.time_frame.grid(row=2, column=4)
-        self.time_label = tk.Label(master=self.root, text="Time:",
-                        font='Arial 15', bd=5, relief='groove')
+        self.time_label = tk.Label(master=self.root, text="Time:", font='Arial 15', bd=5, relief='groove')
         self.time_label.grid(row=2, column=0, columnspan=4, pady=10)
         self.time_hour_entry = tk.Entry(self.time_frame, textvariable=self.userHourTime, width=6, justify='center')
         self.time_hour_entry.grid(row=2, column= 5, padx=5, pady=1)
-        self.time_min_entry = tk.Entry(self.time_frame, textvariable= self.userMinTime, width=6, justify='center')
+        self.time_min_entry = tk.Entry(self.time_frame, textvariable=self.userMinTime, width=6, justify='center')
         self.time_min_entry.grid(row=2, column=6, padx=5, pady=1)
-        self.time_sec_entry = tk.Entry(self.time_frame,textvariable= self.userSecTime, width=6, justify='center')
+        self.time_sec_entry = tk.Entry(self.time_frame,textvariable=self.userSecTime, width=6, justify='center')
         self.time_sec_entry.grid(row=2, column=7, padx=5, pady=1)
 
-        self.distance_frame = tk.Frame(self.root, bg = "black", bd=1,
-                                  relief='groove', padx=0, pady=0)
+        self.distance_frame = tk.Frame(self.root, bg = "black", bd=1, relief='groove', padx=0, pady=0)
         self.distance_frame.grid(row=3, column=4)
-        self.distance_label = tk.Label(master=self.root, text="Distance:",
-                            font='Arial 15', bd=5, relief='groove')
+        self.distance_label = tk.Label(master=self.root, text="Distance:", font='Arial 15', bd=5, relief='groove')
         self.distance_label.grid(row=3, column=0, columnspan=4, pady=10)
-        self.distance_entry = tk.Entry(self.distance_frame, textvariable= self.userDistance, width=20, justify='center')
+        self.distance_entry = tk.Entry(self.distance_frame, textvariable=self.userDistance, width=20, justify='center')
         self.distance_entry.grid(row=3, column=1, padx=5, pady=1)
         self.distance_mi_button = tk.Checkbutton(self.distance_frame, text="mi", variable=self.distanceUnitsMi, onvalue='yes', offvalue='no', font='Arial 14')
         self.distance_mi_button.grid(row=2, column=5)
@@ -67,11 +61,9 @@ class First_Window_GUI:
         self.distance_km_button.deselect()
         self.distance_m_button.deselect()
 
-        self.pace_frame = tk.Frame(self.root, bg="black", bd=1,
-                              relief='groove', padx=0, pady=0)
+        self.pace_frame = tk.Frame(self.root, bg="black", bd=1, relief='groove', padx=0, pady=0)
         self.pace_frame.grid(row=4, column=4)
-        self.pace = tk.Label(master=self.root, text="Pace:",
-                        font='Arial 15', bd=5, relief='groove')
+        self.pace = tk.Label(master=self.root, text="Pace:", font='Arial 15', bd=5, relief='groove')
         self.pace.grid(row=4, column=0, columnspan=4, pady=10)
         self.pace_min_entry = tk.Entry(self.pace_frame, textvariable= self.userMinPace, width=10, justify='center')
         self.pace_min_entry.grid(row=4, column=3, padx=5, pady=1)
