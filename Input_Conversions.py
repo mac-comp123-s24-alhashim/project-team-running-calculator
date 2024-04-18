@@ -30,7 +30,8 @@ def pace_convert(pace_input_minutes, pace_input_seconds, units_input_pace):
 
 
 if __name__ == "__main__":
-    print(pace_convert(4,30, "per mi"))
-    print(distance_convert(1, "mi"))
+    pace_in_sec_per_km = pace_convert(1,0, "per mi")
+    distance_in_meters = distance_convert(1, "mi")
+    print((pace_in_sec_per_km * (distance_in_meters / 1000)))
 
 

@@ -19,11 +19,7 @@ class First_Window_GUI:
 
         self.userMinPace = tk.StringVar()
         self.userSecPace = tk.StringVar()
-        self.paceUnitsMi = tk.StringVar()
-        self.paceUnitsKm = tk.StringVar()
-
-
-
+        self.paceUnits = tk.StringVar()
 
     def createWidgets(self):
         self.root.title('Running Calculator')
@@ -45,7 +41,7 @@ class First_Window_GUI:
         self.time_sec_entry = tk.Entry(self.time_frame,textvariable=self.userSecTime, width=6, justify='center')
         self.time_sec_entry.grid(row=2, column=7, padx=5, pady=1)
 
-        self.distance_frame = tk.Frame(self.root, bg = "black", bd=1, relief='groove', padx=0, pady=0)
+        self.distance_frame = tk.Frame(self.root, bg="black", bd=1, relief='groove', padx=0, pady=0)
         self.distance_frame.grid(row=3, column=4)
         self.distance_label = tk.Label(master=self.root, text="Distance:", font='Arial 15', bd=5, relief='groove')
         self.distance_label.grid(row=3, column=0, columnspan=4, pady=10)
@@ -57,7 +53,7 @@ class First_Window_GUI:
         self.distance_km_button.grid(row=3, column=5)
         self.distance_m_button = tk.Checkbutton(self.distance_frame, text="m", variable=self.distanceUnitsM, onvalue='yes', offvalue='no', font='Arial 14')
         self.distance_m_button.grid(row=4, column=5)
-        self.distance_mi_button.select()
+        self.distance_mi_button.deselect()
         self.distance_km_button.deselect()
         self.distance_m_button.deselect()
 
@@ -69,11 +65,11 @@ class First_Window_GUI:
         self.pace_min_entry.grid(row=4, column=3, padx=5, pady=1)
         self.pace_sec_entry = tk.Entry(self.pace_frame,textvariable=self.userSecPace, width=10, justify='center')
         self.pace_sec_entry.grid(row=4, column=4, padx=5, pady=1)
-        self.pace_per_mi_button = tk.Checkbutton(self.pace_frame, text="per mi", variable=self.paceUnitsMi, onvalue='yes', offvalue='no', font='Arial 14')
+        self.pace_per_mi_button = tk.Checkbutton(self.pace_frame, text="per mi", variable=self.paceUnits, onvalue='per mi', offvalue='per km', font='Arial 14')
         self.pace_per_mi_button.grid(row=3, column=5)
-        self.pace_per_km_button = tk.Checkbutton(self.pace_frame, text="per km",variable=self.paceUnitsKm, onvalue='yes', offvalue='no', font='Arial 14')
+        self.pace_per_km_button = tk.Checkbutton(self.pace_frame, text="per km",variable=self.paceUnits, onvalue='per km', offvalue='per mi', font='Arial 14')
         self.pace_per_km_button.grid(row=4, column=5)
-        self.pace_per_mi_button.select()
+        self.pace_per_mi_button.deselect()
         self.pace_per_km_button.deselect()
 
         self.submitButton = tk.Button(self.root, text="Submit", command=self.calculations)
@@ -84,43 +80,57 @@ class First_Window_GUI:
         minTime = self.userMinTime.get()
         secTime = self.userSecTime.get()
 
-        distance = float(self.userDistance.get())
+        distance = self.userDistance.get()
         distanceUnitsMi = self.distanceUnitsMi.get()
         distanceUnitsKm = self.distanceUnitsKm.get()
         distanceUnitsM = self.distanceUnitsM.get()
 
-        minPace = float(self.userMinPace.get())
-        secPace = float(self.userSecPace.get())
-        paceUnitsMi = self.paceUnitsMi.get()
-        paceUnitsKm = self.paceUnitsKm.get()
+        minPace = self.userMinPace.get()
+        secPace = self.userSecPace.get()
+        paceUnits = self.paceUnits.get()
 
         distanceUnits = ''
-        paceUnits = ''
 
         if distanceUnitsMi == 'yes':
             distanceUnits = "mi"
 
-        if distanceUnitsKm == 'yes':
+        elif distanceUnitsKm == 'yes':
             distanceUnits = "km"
 
-        if distanceUnitsM == 'yes':
+        elif distanceUnitsM == 'yes':
             distanceUnits = "m"
 
-        if paceUnitsMi == 'yes':
-            paceUnits = "per mi"
-
-        if paceUnitsKm =='yes':
-            paceUnits = "per km"
-
         if hourTime + minTime + secTime == '':
+            distance = float(distance)
             distance_in_meters = distance_convert(distance, distanceUnits)
             pace_in_sec_per_km = pace_convert(minPace, secPace, paceUnits)
-            final_pace = (pace_in_sec_per_km * (distance_in_meters / 1000))
+            final_time_sec = (pace_in_sec_per_km * (distance_in_meters / 1000))
+            print(final_time_sec)
+
+        if distance == '':
+            pace_in_sec_per_km = pace_convert(minPace, secPace, paceUnits)
+            time_in_sec = time_convert(hourTime, minTime, secTime)
+            final_distance = ''
+            if distanceUnits == "mi":
+                final_distance = (time_in_sec / (pace_in_sec_per_km * 1.609344))
+            elif distanceUnits == "km":
+                final_distance = time_in_sec / pace_in_sec_per_km
+            elif distanceUnits == "m":
+                final_distance = (time_in_sec / (pace_in_sec_per_km / 1000))
+            print(final_distance)
+
+        if minPace + secPace == '':
+            distance = float(distance)
+            distance_in_meters = distance_convert(distance, distanceUnits)
+            time_in_sec = time_convert(hourTime, minTime, secTime)
+            final_pace_sec = ''
             if paceUnits == "per mi":
-                final_pace = final_pace * 1.60934
+                final_pace_sec = time_in_sec / (distance_in_meters / 1609.344)
             elif paceUnits == "per km":
-                final_pace = final_pace
-            print(final_pace)
+                final_pace_sec = time_in_sec / (distance_in_meters / 1000)
+            print(final_pace_sec)
+
+
 
 
 
