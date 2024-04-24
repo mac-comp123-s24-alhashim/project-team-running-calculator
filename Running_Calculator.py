@@ -4,6 +4,8 @@ from Lap_Splits_Output import *
 import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
+from datetime import timedelta
+
 
 
 class First_Window_GUI:
@@ -109,13 +111,19 @@ class First_Window_GUI:
 
         displaylaps = self.displaylaps.get()
         tracktype = self.tracktype.get()
+        final_time_sec = 0
+        final_distance = 0
+        final_pace_sec = 0
+        final_distance_meters = 0
 
         if hourTime + minTime + secTime == '':
             distance = float(distance)
             distance_in_meters = distance_convert(distance, distanceUnits)
             pace_in_sec_per_km = pace_convert(minPace, secPace, paceUnits)
             final_time_sec = (pace_in_sec_per_km * (distance_in_meters / 1000))
-            return final_time_sec
+            final_distance = distance
+            final_pace_sec = pace_in_sec_per_km
+            print(final_time_sec)
 
         if distance == '':
             pace_in_sec_per_km = pace_convert(minPace, secPace, paceUnits)
@@ -127,47 +135,75 @@ class First_Window_GUI:
                 final_distance = time_in_sec / pace_in_sec_per_km
             elif distanceUnits == "m":
                 final_distance = (time_in_sec / (pace_in_sec_per_km / 1000))
-            return final_distance
+            final_pace_sec = pace_in_sec_per_km
+            final_time_sec = time_in_sec
+            print(final_distance)
+
 
         if minPace + secPace == '':
             distance = float(distance)
             distance_in_meters = distance_convert(distance, distanceUnits)
             time_in_sec = time_convert(hourTime, minTime, secTime)
-            final_pace_sec = ''
             if paceUnits == "per mi":
                 final_pace_sec = time_in_sec / (distance_in_meters / 1609.344)
             elif paceUnits == "per km":
                 final_pace_sec = time_in_sec / (distance_in_meters / 1000)
-            return final_pace_sec
+            final_distance_meters = distance_in_meters
+            final_distance = distance
+            final_time_sec = time_in_sec
+            print(final_pace_sec)
 
         if displaylaps == 'Yes':
-            numberlaps = num_laps(final_distance, tracktype)
+            numberlaps = num_laps(final_distance_meters, tracktype)
             splits = even_lap_splits(numberlaps, final_time_sec)
-            return splits
+            print(splits)
+
+        final_time = timedelta(seconds=final_time_sec)
+        final_time = str(final_time - timedelta(microseconds=final_time.microseconds))
+        final_pace = timedelta(seconds=final_pace_sec)
+        final_pace = str(final_pace - timedelta(microseconds=final_pace.microseconds))
+
+        self.root.withdraw()
+
+        self.main = ttk.Toplevel()
+        self.main.title('Running Calculator')
+        self.welcome = ttk.Label(master=self.main, text="Tyler and Noah's Running Calculator", font='Arial 20 bold')
+        self.welcome.grid(row=0, column=0, columnspan=12)
+
+        self.time_frame = ttk.Frame(self.main)
+        self.time_frame.grid(row=2, column=0)
+        self.time_label = ttk.Label(master=self.time_frame, text="Time:", font='Arial 15')
+        self.time_label.grid(row=0, column=0, columnspan=4, padx=5)
+        self.time_label2 = ttk.Label(master = self.time_frame, text= final_time, font='Arial 15')
+        self.time_label2.grid(row=0, column=6, padx=5)
+
+        self.distance_frame = ttk.Frame(self.main)
+        self.distance_frame.grid(row=3, column=0)
+        self.distance_label = ttk.Label(master=self.distance_frame, text="Distance:", font='Arial 15')
+        self.distance_label.grid(row=2, column=0, columnspan=4, padx=5)
+        self.distance_2 = ttk.Label(master = self.distance_frame,text= final_distance, font='Arial 15')
+        self.distance_2.grid(row=2, column=6, padx=5)
+        self.distance_3 = ttk.Label(self.distance_frame,text=distanceUnits, font='Arial 15')
+        self.distance_3.grid(row=2, column=7)
+
+        self.pace_frame = ttk.Frame(self.main)
+        self.pace_frame.grid(row=4, column=0)
+        self.pace = ttk.Label(master=self.pace_frame, text="Pace:", font='Arial 15')
+        self.pace.grid(row=1, column=0, columnspan=4, padx=5)
+        self.pace2 = ttk.Label(master=self.pace_frame, text= final_pace, font='Arial 15')
+        self.pace2.grid(row=1, column=6, padx=5)
+        self.pace3 = ttk.Label(master=self.pace_frame, text= paceUnits, font='Arial 15')
+        self.pace3.grid(row=1, column=7, padx=5)
 
 
 
 
-
-
-
-
-
+        self.main.mainloop()
 
 
     def goProgram(self):
         self.root.mainloop()
 
-
-"""
-Amin said to try using the Frame widget. It puts a grid that we can manipulate within the tkinter grid.
-
-
-4/16:
-i added tk.stringvar to all of the entry and button widgets so we can start doing calculations  
-
-
-"""
 
 
 
