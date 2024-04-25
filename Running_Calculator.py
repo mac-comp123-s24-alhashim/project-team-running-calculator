@@ -162,9 +162,10 @@ class First_Window_GUI:
         final_time = str(final_time - timedelta(microseconds=final_time.microseconds))
         final_pace = timedelta(seconds=final_pace_sec)
         final_pace = str(final_pace - timedelta(microseconds=final_pace.microseconds))
-        numberlaps = int(num_laps(final_distance_meters, tracktype))
+        numberlaps = num_laps(final_distance_meters, tracktype)
         splits = int(even_lap_splits(numberlaps, final_time_sec))
-        laps = numberlaps
+        laps = int(numberlaps)
+        non_whole_laps = numberlaps - laps
         self.root.withdraw()
 
         self.main = ttk.Toplevel()
@@ -200,10 +201,24 @@ class First_Window_GUI:
         self.splits_frame = ttk.Frame(self.main)
         self.splits_frame.grid(row=5, column=0)
 
-        while laps > 0:
-            self.splits = ttk.Label(master=self.pace_frame, text=splits, font='Arial 15')
-            self.splits.grid(row=laps+1, column=0) 
-            laps = laps-1
+        lapsCol = 1
+        lapsRow = 0
+        self.splitsDisplay = []
+        print(laps)
+        print(non_whole_laps)
+
+        for i in range(1, laps + 1):
+            if i != 0 and i % 5 == 0:
+                splits_label = ttk.Label(self.splits_frame, text = "+" + str(splits))
+                splits_label.grid(row = lapsRow, column = lapsCol, padx=10, pady=10)
+                self.splitsDisplay.append(splits_label)
+                lapsCol = lapsCol + 2
+                lapsRow = 0
+            else:
+                splits_label = ttk.Label(self.splits_frame, text= "+" + str(splits))
+                splits_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
+                self.splitsDisplay.append(splits_label)
+                lapsRow = lapsRow + 2
 
         self.main.mainloop()
 
