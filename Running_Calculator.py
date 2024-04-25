@@ -10,7 +10,7 @@ from datetime import timedelta
 
 class First_Window_GUI:
     def __init__(self):
-        self.root = ttk.Window(themename="flatly")
+        self.root = ttk.Window(themename="flatly") #???
 
         self.userHourTime = ttk.StringVar()
         self.userMinTime = ttk.StringVar()
@@ -162,7 +162,9 @@ class First_Window_GUI:
         final_time = str(final_time - timedelta(microseconds=final_time.microseconds))
         final_pace = timedelta(seconds=final_pace_sec)
         final_pace = str(final_pace - timedelta(microseconds=final_pace.microseconds))
-
+        numberlaps = int(num_laps(final_distance_meters, tracktype))
+        splits = int(even_lap_splits(numberlaps, final_time_sec))
+        laps = numberlaps
         self.root.withdraw()
 
         self.main = ttk.Toplevel()
@@ -195,8 +197,13 @@ class First_Window_GUI:
         self.pace3 = ttk.Label(master=self.pace_frame, text= paceUnits, font='Arial 15')
         self.pace3.grid(row=1, column=7, padx=5)
 
+        self.splits_frame = ttk.Frame(self.main)
+        self.splits_frame.grid(row=5, column=0)
 
-
+        while laps > 0:
+            self.splits = ttk.Label(master=self.pace_frame, text=splits, font='Arial 15')
+            self.splits.grid(row=laps+1, column=0) 
+            laps = laps-1
 
         self.main.mainloop()
 
