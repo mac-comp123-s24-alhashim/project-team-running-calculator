@@ -7,7 +7,20 @@ from ttkbootstrap.constants import *
 from datetime import timedelta
 import math
 
+"""
+Things we MUST do:
 
+fix look of first GUI
+Add track image/type of track selected in 2nd GUI(black and white indoor cartoon track above view
+Add error message if more than 5k indoor is selected/and 10k outdoor
+
+
+Things we WANT to add:
+indor mile specification (add extra time of 8m to first lap)
+make buttons for pace autochecked when program is opened
+
+
+"""
 
 class First_Window_GUI:
     def __init__(self):
