@@ -5,6 +5,7 @@ import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from datetime import timedelta
+import math
 
 
 
@@ -115,6 +116,7 @@ class First_Window_GUI:
         final_distance = 0
         final_pace_sec = 0
         final_distance_meters = 0
+        pace_in_sec_per_km = 0
 
         if hourTime + minTime + secTime == '':
             distance = float(distance)
@@ -137,6 +139,7 @@ class First_Window_GUI:
                 final_distance = (time_in_sec / (pace_in_sec_per_km / 1000))
             final_pace_sec = pace_in_sec_per_km
             final_time_sec = time_in_sec
+            distance_in_meters = final_distance
             print(final_distance)
 
 
@@ -146,8 +149,10 @@ class First_Window_GUI:
             time_in_sec = time_convert(hourTime, minTime, secTime)
             if paceUnits == "per mi":
                 final_pace_sec = time_in_sec / (distance_in_meters / 1609.344)
+                pace_in_sec_per_km = time_in_sec / (distance_in_meters / 1000)
             elif paceUnits == "per km":
                 final_pace_sec = time_in_sec / (distance_in_meters / 1000)
+                pace_in_sec_per_km = final_pace_sec
             final_distance_meters = distance_in_meters
             final_distance = distance
             final_time_sec = time_in_sec
@@ -165,7 +170,7 @@ class First_Window_GUI:
         numberlaps = num_laps(final_distance_meters, tracktype)
         splits = int(even_lap_splits(numberlaps, final_time_sec))
         laps = int(numberlaps)
-        non_whole_laps = numberlaps - laps
+
         self.root.withdraw()
 
         self.main = ttk.Toplevel()
@@ -198,27 +203,53 @@ class First_Window_GUI:
         self.pace3 = ttk.Label(master=self.pace_frame, text= paceUnits, font='Arial 15')
         self.pace3.grid(row=1, column=7, padx=5)
 
-        self.splits_frame = ttk.Frame(self.main)
+        self.splits_frame = ttk.Labelframe(self.main)
         self.splits_frame.grid(row=5, column=0)
 
         lapsCol = 1
         lapsRow = 0
+        total = timedelta(seconds =0)
+        non_whole_distance = 0
+        if tracktype == "Outdoor":
+            non_whole_distance = final_distance_meters - (400 * laps)
+        else:
+            non_whole_distance = final_distance_meters - (200 * laps)
+
+        non_whole_split = round(pace_in_sec_per_km * (non_whole_distance / 1000), 2)
+        non_whole_laps = round(numberlaps - laps, 2)
+        print(non_whole_split)
+        print(non_whole_distance)
+
         self.splitsDisplay = []
         print(laps)
         print(non_whole_laps)
 
         for i in range(1, laps + 1):
             if i != 0 and i % 5 == 0:
-                splits_label = ttk.Label(self.splits_frame, text = "+" + str(splits))
+                splits_label = ttk.Label(self.splits_frame, text = "Lap" +  ":" +" " + str(i)+  " " + "+" + str(splits) + " " + "sec")
                 splits_label.grid(row = lapsRow, column = lapsCol, padx=10, pady=10)
                 self.splitsDisplay.append(splits_label)
+                total = total + timedelta(seconds=splits)
+                total_label = ttk.Label(self.splits_frame, text=   str(total))
+                total_label.grid(row=lapsRow+1, column=lapsCol, padx=10, pady=10)
                 lapsCol = lapsCol + 2
                 lapsRow = 0
             else:
-                splits_label = ttk.Label(self.splits_frame, text= "+" + str(splits))
+                splits_label = ttk.Label(self.splits_frame, text= "Lap" +  ":" +" " + str(i)+  " " + "+" + str(splits) + " " + "sec")
                 splits_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
                 self.splitsDisplay.append(splits_label)
+                total = total + timedelta(seconds=splits)
+                total_label = ttk.Label(self.splits_frame, text=  str(total))
+                total_label.grid(row=lapsRow+1, column=lapsCol, padx=10, pady=10)
                 lapsRow = lapsRow + 2
+
+        if non_whole_laps != 0:
+            non_whole_label= ttk.Label(self.splits_frame, text= "Lap" +  ":" +" " + str(laps+non_whole_laps)+  " " + "+" + str(non_whole_split) + " " + "sec")
+            non_whole_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
+            total = total + timedelta(seconds=non_whole_split)
+            total_label1 = ttk.Label(self.splits_frame, text=str(total))
+            total_label1.grid(row=lapsRow + 1, column=lapsCol, padx=10, pady=10)
+
 
         self.main.mainloop()
 
