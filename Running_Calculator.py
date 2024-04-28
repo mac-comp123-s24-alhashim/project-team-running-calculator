@@ -40,9 +40,7 @@ class first_Window_GUI:
         self.displayLaps = ttk.StringVar()
         self.trackType = ttk.StringVar()
 
-        image = Image.open('/users/tyleredwards/Downloads/Track.jpeg')
-        img = image.resize((450, 300))
-        img.save("Track.jpeg")
+
 
     def createWidgets(self):
         self.root.title('Running Calculator')
@@ -135,11 +133,11 @@ class first_Window_GUI:
         self.indoor_button = ttk.Checkbutton(self.display_laps_frame,
                                              text= "Indoor", variable =self.trackType,
                                              onvalue='Indoor', offvalue='Outdoor')
-        self.indoor_button.grid(row=6, column = 3)
+        self.indoor_button.grid(row=6, column = 2)
         self.outdoor_button = ttk.Checkbutton(self.display_laps_frame,
                                               text= "Outdoor", variable =self.trackType,
                                               onvalue='Outdoor', offvalue='Indoor')
-        self.outdoor_button.grid(row=6, column = 4)
+        self.outdoor_button.grid(row=6, column = 3)
 
         self.submitButton = ttk.Button(self.root,
                                        text="Submit", command=self.calculations)
@@ -232,10 +230,10 @@ class first_Window_GUI:
             final_time_sec = time_in_sec
 
         if final_distance_meters > 10000 and tracktype == "Outdoor" and displaylaps == "Yes":
-            messagebox.showwarning("showerror", "Distance must be less than 10,000m")
+            messagebox.showwarning("showerror", "Distance must be less than 10,000m")#won't run if miles is selected first time
 
         if final_distance_meters > 5000 and tracktype == "Indoor" and displaylaps == "Yes":
-            messagebox.showwarning("showerror", "Distance must be less than 5,000m")
+            messagebox.showwarning("showerror", "Distance must be less than 5,000m")#won't run if miles is selected first time
 
         if displaylaps == 'Yes':
             numberlaps = num_laps(final_distance_meters, tracktype)
