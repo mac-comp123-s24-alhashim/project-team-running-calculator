@@ -20,19 +20,6 @@ indor mile specification (add extra time of 8m to first lap)
 Try to make it look nicer/more readable (started to do this slightly)
 
 
-Bugs/Issues:
-CALCULATING DISTANCE FROM ONLY PACE AND TIME DOESNT WORK AT ALL!!
-SAME FOR CALCULATING TIME FROM DISTANCE AND PACE
-    For this I think it's the if-loops. Because if someone does not want laps, they leave
-    indoor/outdoor unselected, which messes everything up/plus I don't think the way it runs 
-    right now allows for just the normal calculations.
-    Either we need to add more options for the if loops if unselected, or we need to figure out a way
-    to keep those if loops for the lap splits separate from the original calculations. 
-
-Error message for selecting too far of a distance won't run if miles initially selected
-When calculating for miles indoor track only 1 lap appears (just the extra 9 meters)
-When calculating for miles on outdoor track, split don't appear.
-
 
 """
 
@@ -255,17 +242,16 @@ class first_Window_GUI:
         if final_distance_meters > 5000 and tracktype == "Indoor" and displaylaps == "Yes":
             messagebox.showwarning("showerror", "Distance must be less than 5,000m")#won't run if miles is selected first time
 
-        if displaylaps == 'Yes':
-            numberlaps = num_laps(final_distance_meters, tracktype)
-            splits = even_lap_splits(numberlaps, final_time_sec)
-
         final_time = timedelta(seconds=final_time_sec)
         final_time = str(final_time - timedelta(microseconds=final_time.microseconds))
         final_pace = timedelta(seconds=final_pace_sec)
         final_pace = str(final_pace - timedelta(microseconds=final_pace.microseconds))
-        numberlaps = num_laps(final_distance_meters, tracktype)
-        splits = int(even_lap_splits(numberlaps, final_time_sec))
-        laps = int(numberlaps)
+
+        if displaylaps == 'Yes':
+            numberlaps = num_laps(distance_in_meters, tracktype)
+            splits = int(even_lap_splits(numberlaps, final_time_sec))
+            laps = int(numberlaps)
+
 
         self.root.withdraw()
 
@@ -325,40 +311,41 @@ class first_Window_GUI:
 
         self.splitsDisplay = []
 
-        for i in range(1, laps + 1):
-            if i != 0 and i % 5 == 0:
-                splits_label = ttk.Label(self.splits_frame,
-                                         text = "Lap" +  ":" +" " + str(i)+
+        if displaylaps == "Yes":
+            for i in range(1, laps + 1):
+                if i != 0 and i % 5 == 0:
+                    splits_label = ttk.Label(self.splits_frame,
+                                            text = "Lap" +  ":" +" " + str(i)+
                                                 " " + "+" + str(splits) + " " + "sec")
-                splits_label.grid(row = lapsRow, column = lapsCol, padx=10, pady=10)
-                self.splitsDisplay.append(splits_label)
-                total = total + timedelta(seconds=splits)
-                total_label = ttk.Label(self.splits_frame, text= str(total))
-                total_label.grid(row=lapsRow+1, column=lapsCol, padx=10, pady=10)
-                lapsCol = lapsCol + 2
-                lapsRow = 1
-            else:
-                splits_label = ttk.Label(self.splits_frame, text= "Lap" + ":" + " " + str(i) + " " +
+                    splits_label.grid(row = lapsRow, column = lapsCol, padx=10, pady=10)
+                    self.splitsDisplay.append(splits_label)
+                    total = total + timedelta(seconds=splits)
+                    total_label = ttk.Label(self.splits_frame, text= str(total))
+                    total_label.grid(row=lapsRow+1, column=lapsCol, padx=10, pady=10)
+                    lapsCol = lapsCol + 2
+                    lapsRow = 1
+                else:
+                    splits_label = ttk.Label(self.splits_frame, text= "Lap" + ":" + " " + str(i) + " " +
                                                                   "+" + str(splits) + " " + "sec")
-                splits_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
-                self.splitsDisplay.append(splits_label)
-                total = total + timedelta(seconds=splits)
-                total_label = ttk.Label(self.splits_frame, text=str(total))
-                total_label.grid(row=lapsRow+1, column=lapsCol, padx=10, pady=10)
-                lapsRow = lapsRow + 2
+                    splits_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
+                    self.splitsDisplay.append(splits_label)
+                    total = total + timedelta(seconds=splits)
+                    total_label = ttk.Label(self.splits_frame, text=str(total))
+                    total_label.grid(row=lapsRow+1, column=lapsCol, padx=10, pady=10)
+                    lapsRow = lapsRow + 2
 
-        if non_whole_laps != 0:
-            non_whole_label= ttk.Label(self.splits_frame, text= "Lap" + ":" + " " +
+            if non_whole_laps != 0:
+                non_whole_label= ttk.Label(self.splits_frame, text= "Lap" + ":" + " " +
                                                                 str(laps+non_whole_laps)+ " " +
                                                                 "+" + str(non_whole_split) + " " + "sec")
-            non_whole_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
-            total = total + timedelta(seconds=non_whole_split)
-            total_label1 = ttk.Label(self.splits_frame, text=str(total))
-            total_label1.grid(row=lapsRow + 1, column=lapsCol, padx=10, pady=10)
+                non_whole_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
+                total = total + timedelta(seconds=non_whole_split)
+                total_label1 = ttk.Label(self.splits_frame, text=str(total))
+                total_label1.grid(row=lapsRow + 1, column=lapsCol, padx=10, pady=10)
 
-        trackImage = ImageTk.PhotoImage(file="Track.jpeg")
-        imageLabel = ttk.Label(self.main, image=trackImage)
-        imageLabel.grid(row=5, column = 0, padx=0, pady = 0)
+            trackImage = ImageTk.PhotoImage(file="Track.jpeg")
+            imageLabel = ttk.Label(self.main, image=trackImage)
+            imageLabel.grid(row=5, column = 0, padx=0, pady = 0)
 
         #trackImage = ImageTk.PhotoImage(file="Indoor_track.jpg")
         #imageLabel = ttk.Label(self.main, image=trackImage)
