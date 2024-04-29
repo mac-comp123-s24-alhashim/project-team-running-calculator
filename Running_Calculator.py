@@ -19,6 +19,21 @@ Things we WANT to add:
 indor mile specification (add extra time of 8m to first lap)
 Try to make it look nicer/more readable (started to do this slightly)
 
+
+Bugs/Issues:
+CALCULATING DISTANCE FROM ONLY PACE AND TIME DOESNT WORK AT ALL!!
+SAME FOR CALCULATING TIME FROM DISTANCE AND PACE
+    For this I think it's the if-loops. Because if someone does not want laps, they leave
+    indoor/outdoor unselected, which messes everything up/plus I don't think the way it runs 
+    right now allows for just the normal calculations.
+    Either we need to add more options for the if loops if unselected, or we need to figure out a way
+    to keep those if loops for the lap splits separate from the original calculations. 
+
+Error message for selecting too far of a distance won't run if miles initially selected
+When calculating for miles indoor track only 1 lap appears (just the extra 9 meters)
+When calculating for miles on outdoor track, split don't appear.
+
+
 """
 
 
@@ -39,6 +54,9 @@ class first_Window_GUI:
 
         self.displayLaps = ttk.StringVar()
         self.trackType = ttk.StringVar()
+
+
+
 
 
 
@@ -99,10 +117,12 @@ class first_Window_GUI:
                                         textvariable=self.userSecPace, width=10, justify='center')
         self.pace_sec_entry.grid(row=1, column=7, padx=5)
         self.pace_per_mi_button = ttk.Checkbutton(self.pace_frame,
-                                                  text="per mi", variable=self.paceUnits, onvalue='per mi', offvalue='per km')
+                                                  text="per mi", variable=self.paceUnits,
+                                                  onvalue='per mi', offvalue='per km')
         self.pace_per_mi_button.grid(row=0, column=8)
         self.pace_per_km_button = ttk.Checkbutton(self.pace_frame,
-                                                  text="per km",variable=self.paceUnits, onvalue='per km', offvalue='per mi')
+                                                  text="per km",variable=self.paceUnits,
+                                                  onvalue='per km', offvalue='per mi')
         self.pace_per_km_button.grid(row=1, column=8)
         self.pace_per_mi_button.state(['selected'])
 
@@ -339,6 +359,12 @@ class first_Window_GUI:
         trackImage = ImageTk.PhotoImage(file="Track.jpeg")
         imageLabel = ttk.Label(self.main, image=trackImage)
         imageLabel.grid(row=5, column = 0, padx=0, pady = 0)
+
+        #trackImage = ImageTk.PhotoImage(file="Indoor_track.jpg")
+        #imageLabel = ttk.Label(self.main, image=trackImage)
+        #imageLabel.grid(row=5, column=0, padx=0, pady=0)
+
+
 
         self.main.mainloop()
 
