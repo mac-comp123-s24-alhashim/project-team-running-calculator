@@ -301,13 +301,15 @@ class first_Window_GUI:
         lapsRow = 1
         total = timedelta(seconds =0)
         non_whole_distance = 0
-        if tracktype == "Outdoor":
-            non_whole_distance = final_distance_meters - (400 * laps)
-        else:
-            non_whole_distance = final_distance_meters - (200 * laps)
 
-        non_whole_split = round(pace_in_sec_per_km * (non_whole_distance / 1000), 2)
-        non_whole_laps = round(numberlaps - laps, 2)
+        if displaylaps == "Yes":
+            non_whole_split = round(pace_in_sec_per_km * (non_whole_distance / 1000), 2)
+            non_whole_laps = round(numberlaps - laps, 2)
+            if tracktype == "Outdoor":
+                non_whole_distance = final_distance_meters - (400 * laps)
+            if tracktype == "Indoor":
+                non_whole_distance = final_distance_meters - (200 * laps)
+
 
         self.splitsDisplay = []
 
