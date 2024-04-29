@@ -42,11 +42,6 @@ class first_Window_GUI:
         self.displayLaps = ttk.StringVar()
         self.trackType = ttk.StringVar()
 
-
-
-
-
-
     def createWidgets(self):
         self.root.title('Running Calculator')
 
@@ -90,7 +85,6 @@ class first_Window_GUI:
         self.distance_m_button = ttk.Checkbutton(self.distance_frame,
                                                  text="m", variable=self.distanceUnits, onvalue='m')
         self.distance_m_button.grid(row=3, column=7)
-        self.distance_mi_button.state(['selected'])
 
         self.pace_frame = ttk.Frame(self.root)
         self.pace_frame.grid(row=4, column=0)
@@ -111,7 +105,6 @@ class first_Window_GUI:
                                                   text="per km",variable=self.paceUnits,
                                                   onvalue='per km', offvalue='per mi')
         self.pace_per_km_button.grid(row=1, column=8)
-        self.pace_per_mi_button.state(['selected'])
 
         self.display_laps_frame = ttk.Frame(self.root)
         self.display_seperator = ttk.Separator(master=self.display_laps_frame,
@@ -205,7 +198,10 @@ class first_Window_GUI:
             pace_in_sec_per_km = pace_convert(minPace, secPace, paceUnits)
             final_time_sec = (pace_in_sec_per_km * (distance_in_meters / 1000))
             final_distance = distance
-            final_pace_sec = pace_in_sec_per_km
+            if paceUnits == "per km":
+                final_pace_sec = pace_in_sec_per_km
+            elif paceUnits == "per mi":
+                final_pace_sec = (pace_in_sec_per_km / 37.282) * 60
 
         if distance == 0:
             pace_in_sec_per_km = pace_convert(minPace, secPace, paceUnits)
@@ -217,7 +213,10 @@ class first_Window_GUI:
                 final_distance = time_in_sec / pace_in_sec_per_km
             elif distanceUnits == "m":
                 final_distance = (time_in_sec / (pace_in_sec_per_km / 1000))
-            final_pace_sec = pace_in_sec_per_km
+            if paceUnits == "per km":
+                final_pace_sec = pace_in_sec_per_km
+            elif paceUnits == "per mi":
+                final_pace_sec = (pace_in_sec_per_km / 37.282) * 60
             final_time_sec = time_in_sec
             distance_in_meters = final_distance
 
@@ -252,6 +251,7 @@ class first_Window_GUI:
             splits = int(even_lap_splits(numberlaps, final_time_sec))
             laps = int(numberlaps)
 
+        final_distance = round(final_distance, 2)
 
         self.root.withdraw()
 
