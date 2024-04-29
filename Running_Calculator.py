@@ -198,6 +198,7 @@ class first_Window_GUI:
             pace_in_sec_per_km = pace_convert(minPace, secPace, paceUnits)
             final_time_sec = (pace_in_sec_per_km * (distance_in_meters / 1000))
             final_distance = distance
+            final_distance_meters = distance_in_meters
             if paceUnits == "per km":
                 final_pace_sec = pace_in_sec_per_km
             elif paceUnits == "per mi":
@@ -219,6 +220,7 @@ class first_Window_GUI:
                 final_pace_sec = (pace_in_sec_per_km / 37.282) * 60
             final_time_sec = time_in_sec
             distance_in_meters = final_distance
+            final_distance_meters = distance_in_meters
 
 
         if minPace + secPace == 0:
@@ -248,12 +250,12 @@ class first_Window_GUI:
 
         if displaylaps == 'Yes':
             numberlaps = num_laps(distance_in_meters, tracktype)
-            splits = int(even_lap_splits(numberlaps, final_time_sec))
+            splits = round(even_lap_splits(numberlaps, final_time_sec), 2)
             laps = int(numberlaps)
 
-        final_distance = round(final_distance, 2)
+        final_distance = round(final_distance, 1)
 
-        self.root.withdraw()
+        #self.root.withdraw()
 
         self.main = ttk.Toplevel()
         self.main.title('Running Calculator')
@@ -303,12 +305,13 @@ class first_Window_GUI:
         non_whole_distance = 0
 
         if displaylaps == "Yes":
-            non_whole_split = round(pace_in_sec_per_km * (non_whole_distance / 1000), 2)
-            non_whole_laps = round(numberlaps - laps, 2)
             if tracktype == "Outdoor":
                 non_whole_distance = final_distance_meters - (400 * laps)
             if tracktype == "Indoor":
                 non_whole_distance = final_distance_meters - (200 * laps)
+            non_whole_split = round(pace_in_sec_per_km * (non_whole_distance / 1000), 2)
+            non_whole_laps = round(numberlaps - laps, 2)
+
 
 
         self.splitsDisplay = []
@@ -322,7 +325,7 @@ class first_Window_GUI:
                     splits_label.grid(row = lapsRow, column = lapsCol, padx=10, pady=10)
                     self.splitsDisplay.append(splits_label)
                     total = total + timedelta(seconds=splits)
-                    total_label = ttk.Label(self.splits_frame, text= str(total))
+                    total_label = ttk.Label(self.splits_frame, text= str(total - timedelta(microseconds=total.microseconds)))
                     total_label.grid(row=lapsRow+1, column=lapsCol, padx=10, pady=10)
                     lapsCol = lapsCol + 2
                     lapsRow = 1
@@ -332,7 +335,7 @@ class first_Window_GUI:
                     splits_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
                     self.splitsDisplay.append(splits_label)
                     total = total + timedelta(seconds=splits)
-                    total_label = ttk.Label(self.splits_frame, text=str(total))
+                    total_label = ttk.Label(self.splits_frame, text=str(total - timedelta(microseconds=total.microseconds)))
                     total_label.grid(row=lapsRow+1, column=lapsCol, padx=10, pady=10)
                     lapsRow = lapsRow + 2
 
@@ -342,7 +345,7 @@ class first_Window_GUI:
                                                                 "+" + str(non_whole_split) + " " + "sec")
                 non_whole_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
                 total = total + timedelta(seconds=non_whole_split)
-                total_label1 = ttk.Label(self.splits_frame, text=str(total))
+                total_label1 = ttk.Label(self.splits_frame, text=str(final_time))
                 total_label1.grid(row=lapsRow + 1, column=lapsCol, padx=10, pady=10)
 
             trackImage = ImageTk.PhotoImage(file="Track.jpeg")

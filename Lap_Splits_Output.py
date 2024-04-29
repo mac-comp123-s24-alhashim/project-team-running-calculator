@@ -18,7 +18,7 @@ def even_lap_splits(lap_num, total_time):
 
 
 if __name__ == "__main__":
-    distance = distance_convert(5000, "m")
-    lap_num = num_laps(distance, "Outdoor")
-    print(even_lap_splits(lap_num, 100))
+    distance = distance_convert(1609, "m")
+    lap_num = num_laps(distance, "Indoor")
+    print(even_lap_splits(lap_num, 300))
 
