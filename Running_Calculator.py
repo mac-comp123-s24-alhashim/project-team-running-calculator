@@ -174,7 +174,7 @@ class first_Window_GUI:
         if minPace == '':
             minPace = 0
         else:
-            distance = int(distance)
+            minPace = int(minPace)
 
         secPace = self.userSecPace.get()
         if secPace == '':
