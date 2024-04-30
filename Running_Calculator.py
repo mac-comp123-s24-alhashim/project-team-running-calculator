@@ -16,7 +16,6 @@ Add track image/type of track selected in 2nd GUI -> added image (still need to 
 
 
 Things we WANT to add:
-indor mile specification (add extra time of 8m to first lap)
 Try to make it look nicer/more readable (started to do this slightly)
 
 
@@ -166,7 +165,7 @@ class first_Window_GUI:
         if distance == '':
             distance = 0
         else:
-            distance = int(distance)
+            distance = float(distance)
 
         distanceUnits = self.distanceUnits.get()
 
