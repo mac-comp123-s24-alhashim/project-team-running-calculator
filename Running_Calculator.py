@@ -12,13 +12,12 @@ from tkinter import messagebox
 Things we MUST do:
 
 fix look of first GUI
-Add track image/type of track selected in 2nd GUI -> added image (still need to add text inside oval)
 
 
 Things we WANT to add:
 Try to make it look nicer/more readable (started to do this slightly)
-
-
+Add specific lap outputs for indoor mile and outdoor 5k? Probably not easy with our current setup
+                                                        -Will try tonight though.
 
 """
 
@@ -40,6 +39,7 @@ class first_Window_GUI:
 
         self.displayLaps = ttk.StringVar()
         self.trackType = ttk.StringVar()
+
 
     def createWidgets(self):
         self.root.title('Running Calculator')
@@ -289,10 +289,10 @@ class first_Window_GUI:
                               text="Pace:", font='Arial 15')
         self.pace.grid(row=1, column=0, columnspan=4, padx=5)
         self.pace2 = ttk.Label(master=self.pace_frame,
-                               text= final_pace, font='Arial 15')
+                               text=final_pace, font='Arial 15')
         self.pace2.grid(row=1, column=6, padx=5)
         self.pace3 = ttk.Label(master=self.pace_frame,
-                               text= paceUnits, font='Arial 15')
+                               text=paceUnits, font='Arial 15')
         self.pace3.grid(row=1, column=7, padx=5)
 
         self.splits_frame = ttk.Labelframe(self.main)
@@ -317,11 +317,11 @@ class first_Window_GUI:
 
         if displaylaps == "Yes":
             for i in range(1, laps + 1):
-                if i != 0 and i % 5 == 0:
+                if i != 0 and i % 4 == 0:
                     splits_label = ttk.Label(self.splits_frame,
-                                            text = "Lap" +  ":" +" " + str(i)+
+                                            text="Lap" + ":" + " " + str(i)+
                                                 " " + "+" + str(splits) + " " + "sec")
-                    splits_label.grid(row = lapsRow, column = lapsCol, padx=10, pady=10)
+                    splits_label.grid(row = lapsRow, column=lapsCol, padx=10, pady=10)
                     self.splitsDisplay.append(splits_label)
                     total = total + timedelta(seconds=splits)
                     total_label = ttk.Label(self.splits_frame, text= str(total - timedelta(microseconds=total.microseconds)))
@@ -329,7 +329,7 @@ class first_Window_GUI:
                     lapsCol = lapsCol + 2
                     lapsRow = 1
                 else:
-                    splits_label = ttk.Label(self.splits_frame, text= "Lap" + ":" + " " + str(i) + " " +
+                    splits_label = ttk.Label(self.splits_frame, text="Lap" + ":" + " " + str(i) + " " +
                                                                   "+" + str(splits) + " " + "sec")
                     splits_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
                     self.splitsDisplay.append(splits_label)
@@ -340,20 +340,22 @@ class first_Window_GUI:
 
             if non_whole_laps != 0:
                 non_whole_label= ttk.Label(self.splits_frame, text= "Lap" + ":" + " " +
-                                                                str(laps+non_whole_laps)+ " " +
+                                                                str(laps+non_whole_laps) + " " +
                                                                 "+" + str(non_whole_split) + " " + "sec")
                 non_whole_label.grid(row=lapsRow, column=lapsCol, padx=10, pady=10)
                 total = total + timedelta(seconds=non_whole_split)
                 total_label1 = ttk.Label(self.splits_frame, text=str(final_time))
                 total_label1.grid(row=lapsRow + 1, column=lapsCol, padx=10, pady=10)
 
-            trackImage = ImageTk.PhotoImage(file="Track.jpeg")
-            imageLabel = ttk.Label(self.main, image=trackImage)
-            imageLabel.grid(row=5, column = 0, padx=0, pady = 0)
+        if tracktype == "Outdoor":
+            track_image = ImageTk.PhotoImage(file="Outdoor_track.jpg")
+            image_label = ttk.Label(self.main, image=track_image)
+            image_label.grid(row=5, column=0, padx=0, pady=0)
+        if tracktype == "Indoor":
+            track_image = ImageTk.PhotoImage(file="Indoor_track.jpg")
+            image_label = ttk.Label(self.main, image=track_image)
+            image_label.grid(row=5, column=0, padx=0, pady=0)
 
-        #trackImage = ImageTk.PhotoImage(file="Indoor_track.jpg")
-        #imageLabel = ttk.Label(self.main, image=trackImage)
-        #imageLabel.grid(row=5, column=0, padx=0, pady=0)
 
 
 
