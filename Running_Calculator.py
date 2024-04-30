@@ -207,19 +207,19 @@ class first_Window_GUI:
             pace_in_sec_per_km = pace_convert(minPace, secPace, paceUnits)
             time_in_sec = time_convert(hourTime, minTime, secTime)
             final_distance = ''
+            final_distance_meters = (time_in_sec / (pace_in_sec_per_km / 1000))
             if distanceUnits == "mi":
                 final_distance = (time_in_sec / (pace_in_sec_per_km * 1.609344))
             elif distanceUnits == "km":
                 final_distance = time_in_sec / pace_in_sec_per_km
             elif distanceUnits == "m":
-                final_distance = (time_in_sec / (pace_in_sec_per_km / 1000))
+                final_distance = final_distance_meters
             if paceUnits == "per km":
                 final_pace_sec = pace_in_sec_per_km
             elif paceUnits == "per mi":
                 final_pace_sec = (pace_in_sec_per_km / 37.282) * 60
             final_time_sec = time_in_sec
-            distance_in_meters = final_distance
-            final_distance_meters = distance_in_meters
+            distance_in_meters = final_distance_meters
 
 
         if minPace + secPace == 0:
@@ -252,7 +252,7 @@ class first_Window_GUI:
             splits = round(even_lap_splits(numberlaps, final_time_sec), 2)
             laps = int(numberlaps)
 
-        final_distance = round(final_distance, 1)
+        final_distance = round(final_distance, 2)
 
         #self.root.withdraw()
 
