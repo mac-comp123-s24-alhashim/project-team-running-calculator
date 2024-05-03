@@ -22,12 +22,27 @@ This project will be an advanced running pace and split calculator which will ou
 The user will  have the option of inputting either their desired pace per mile or overall time (or both!). There will also be a checkbox to specify whether the race is occuring on a 200m indoor track or a 400m outdoor one. Lastly, the user will select whether the distance they are inputting is present in track meets (such as the 1000m, 3200m, etc), so that the program can output per lap splits. Then, the user will click submit and a popup will appear with a variety of new calculated statistics. Firstly, the program will fill in per mile pace or total time if either were left blank in the intial input, then if the input value is one of the distances pre-designated as being common in track meets, there will also be an output of splits per lap, and other important statistics like halfway point times. If the distance entered is not in the list of pre-designated distances, then the program will still fill in per mile pace or total time if either were left blank in the intial input, but will not give per lap splits, just their splits per mile or km (depending on the selected units).
 
 
+#### Requirements to Run The Software
+Our project was coded on Python Version 3.12 and requires the following packages to be installed: PIL, ttkbootstrap, tkinter, and datetime.
+
+
+#### How to Run The Software
+Open our project link on github and navigate to the file labeled "Running_Calculator.py". Run this file and then a popup screen will appear with input boxes for time, pace, and distance, as well as units for distance and pace. In addition, you can also select a specific track type (indoor or outdoor) in order to have lap splits appear in the next popup. Once you have inputted 2 of the 3 main variables, selected units, and decided if you want lap splits to appear, click submit and a new window will open with your desired information. 
+
+
+#### Limitations 
+If you input values for all 3 of pace, distance, and time, the program will not run as there is nothing to be calculated. Additionally, if you do not select units for either distance or pace, the calculated values in the next window will be incorrect. Lastly, if you input a negative number for any of the inputs or put decimals in pace or time, the function will either not run or calculated obviously incorrect values given the nature of trying to input a negative value for distance, pace, or time. 
+
+
 ### Why We Chose This Project
 We chose this project because, as two runners on the Cross Country and Track teams, we noticed there is a lack of a super detailed running pace calculator in the world as of now. Being able to calculate lap splits and pace per mile/km is very important for us as competitive runners, and thus the more data that we can have prior to a race the better. 
 
 
 ### Inspiration Behind This Project
 We have used multiple online pace calculators in the past, but none of them have an effective way of getting splits per lap nor other data points which would be useful for running nerds like ourselves. 
+
+### Recources Referenced
+We look at ttkbootstraps website in order to improve our GUI. 
 
 
 ### Implementation / Responsibility Plan
