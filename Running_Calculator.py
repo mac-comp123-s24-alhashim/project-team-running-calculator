@@ -1,26 +1,19 @@
+"""
+@author: Tyler Edwards (tedward1@macalester.edu)
+@author: Noah Koch (nkoch1@macalester.edu)
+
+This is an advanced running pace and split calculator. The user inputs 2 out of the 3
+variables (Time, Distance, Pace) and returns the calculated value for the unentered variable.
+If selected, either 400 or 200 meter track splits will be calculated and displayed.
+"""
+
 from Input_Conversions import *
 from Lap_Splits_Output import *
-
-import tkinter as tk
 import ttkbootstrap as ttk
 from ttkbootstrap.constants import *
 from datetime import timedelta
 from PIL import Image, ImageTk
 from tkinter import messagebox
-
-"""
-Things we MUST do:
-
-fix look of first GUI
-
-
-Things we WANT to add:
-Try to make it look nicer/more readable (started to do this slightly)
-Add specific lap outputs for indoor mile and outdoor 5k? Probably not easy with our current setup
-                                                        -Will try tonight though.
-
-"""
-
 
 class first_Window_GUI:
     def __init__(self):
@@ -39,7 +32,6 @@ class first_Window_GUI:
 
         self.displayLaps = ttk.StringVar()
         self.trackType = ttk.StringVar()
-
 
     def createWidgets(self):
         self.root.title('Running Calculator')
@@ -221,7 +213,6 @@ class first_Window_GUI:
             final_time_sec = time_in_sec
             distance_in_meters = final_distance_meters
 
-
         if minPace + secPace == 0:
             distance = float(distance)
             distance_in_meters = distance_convert(distance, distanceUnits)
@@ -237,10 +228,10 @@ class first_Window_GUI:
             final_time_sec = time_in_sec
 
         if final_distance_meters > 10000 and tracktype == "Outdoor" and displaylaps == "Yes":
-            messagebox.showwarning("showerror", "Distance must be less than 10,000m")#won't run if miles is selected first time
+            messagebox.showwarning("showerror", "Distance must be less than 10,000m")
 
         if final_distance_meters > 5000 and tracktype == "Indoor" and displaylaps == "Yes":
-            messagebox.showwarning("showerror", "Distance must be less than 5,000m")#won't run if miles is selected first time
+            messagebox.showwarning("showerror", "Distance must be less than 5,000m")
 
         final_time = timedelta(seconds=final_time_sec)
         final_time = str(final_time - timedelta(microseconds=final_time.microseconds))
@@ -253,8 +244,6 @@ class first_Window_GUI:
             laps = int(numberlaps)
 
         final_distance = round(final_distance, 2)
-
-        #self.root.withdraw()
 
         self.main = ttk.Toplevel()
         self.main.title('Running Calculator')
@@ -311,8 +300,6 @@ class first_Window_GUI:
             non_whole_split = round(pace_in_sec_per_km * (non_whole_distance / 1000), 2)
             non_whole_laps = round(numberlaps - laps, 2)
 
-
-
         self.splitsDisplay = []
 
         if displaylaps == "Yes":
@@ -356,21 +343,14 @@ class first_Window_GUI:
             image_label = ttk.Label(self.main, image=track_image)
             image_label.grid(row=5, column=0, padx=0, pady=0)
 
-
-
-
         self.main.mainloop()
-
 
     def goProgram(self):
         self.root.mainloop()
-
-
 
 
 if __name__ == '__main__':
     s = first_Window_GUI()
     s.createWidgets()
     s.goProgram()
-
     print('back to main')

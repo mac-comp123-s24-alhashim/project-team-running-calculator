@@ -1,3 +1,11 @@
+"""
+@author: Tyler Edwards (tedward1@macalester.edu)
+@author: Noah Koch (nkoch1@macalester.edu)
+
+These functions convert to a standardized unit for the calculations of the unentered variable and
+are called in the main file.  (Running_Calculator.py)
+"""
+
 def time_convert(hour_input, minute_input, seconds_input):
     hours = int(hour_input)
     minutes = int(minute_input)
@@ -26,7 +34,6 @@ def pace_convert(pace_input_minutes, pace_input_seconds, units_input_pace):
     if units_input_pace == "per km":
         pace_in_seconds_per_km = pace_in_seconds_per_km
     return pace_in_seconds_per_km
-
 
 
 if __name__ == "__main__":
