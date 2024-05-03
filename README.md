@@ -9,7 +9,7 @@ Tyler Edwards (tedward1@macalester.edu) and Noah Koch (nkoch1@macalester.edu)
 
 
 ### Description 
-This project will be an advanced running pace, split, and race plan calculator which will output a variety of different statistics based on user inputs. Using a Python graphical user interface, a user will select the units of measurement (meters, kilometers, or miles) along with inputing an integer representing (in the chosen units) the distance they are racing. 
+This project will be an advanced running pace and split calculator which will output a variety of different statistics based on user inputs. Using a Python graphical user interface, a user will select the units of measurement (meters, kilometers, or miles) along with inputing an integer representing (in the chosen units) the distance they are racing. 
 
 
 ### Project Sketch
