@@ -31,7 +31,7 @@ Open our project link on github and navigate to the file labeled "Running_Calcul
 
 
 #### Limitations 
-If you input values for all 3 of pace, distance, and time, the program will not run as there is nothing to be calculated. Additionally, if you do not select units for either distance or pace, the calculated values in the next window will be incorrect. Lastly, if you input a negative number for any of the inputs or put decimals in pace or time, the function will either not run or calculated obviously incorrect values given the nature of trying to input a negative value for distance, pace, or time. 
+If you input values for all 3 of pace, distance, and time, the program will not run as there is nothing to be calculated. Additionally, if you do not select units for either distance or pace, the calculated values in the next window will be incorrect. Lastly, if you input a negative number for any of the inputs or put decimals in pace or time, the function will either not run or calculated obviously incorrect values given the nature of trying to input a negative value for distance, pace, or time. Another feature of this calculator is that it allows you to run it multiple times different inputs. One issue that does occur is if you choose to display lap splits on you initial calculation, if you choose to run it again witout lap splits, there is no way to unselect the track type. As a result, on this second calculation, the image displaying the track type will still appear. 
 
 
 ### Why We Chose This Project
