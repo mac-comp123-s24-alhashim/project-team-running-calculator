@@ -48,3 +48,5 @@ We look at ttkbootstraps website in order to improve our GUI.
 ### Implementation / Responsibility Plan
 This project will require a lot of different functions that will all interact with eachother dependent on the inputted values by the user. Therefore, the vast majority of our time will be spent creating said functions and testing them with different input values to ensure there is no buggy interaction nor inaccurate results. We will both be working on making these functions and holding each other accountable to making the workload be split evenly. Ultimately, since the functions will be so interactive, it will be difficult to split the work into multiple parts, rather we will both be working congruently on ensuring everything gets done on time. The primary aim of this project is to have a running calculator which will display not just pace per mile, total time, and distance run, but also things like splits per lap and halfway point times. 
 
+### Screenshots of Example Scenarios
+
