@@ -65,3 +65,5 @@ This project will require a lot of different functions that will all interact wi
 ### Secondary Window With 400m Track Lap Splits
 <img width="528" alt="Screenshot 2024-05-02 at 7 45 27 PM" src="https://github.com/mac-comp123-s24-alhashim/project-team-running-calculator/assets/156964308/d9fed3da-51e4-4296-9575-8b60eef34797">
 
+### Demo Video
+https://drive.google.com/file/d/1f9J6vvULoZf0VtUzLp8-I2SEXLKCcwbg/view?usp=sharing
