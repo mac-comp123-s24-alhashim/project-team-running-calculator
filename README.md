@@ -9,7 +9,7 @@ Tyler Edwards (tedward1@macalester.edu) and Noah Koch (nkoch1@macalester.edu)
 
 
 ### Description 
-This project will be an advanced running pace and split calculator which will output a variety of different statistics based on user inputs. Using a Python graphical user interface, a user will select the units of measurement (meters, kilometers, or miles) along with inputing an integer representing (in the chosen units) the distance they are racing. 
+This project is an advanced running pace and split calculator which outputs a variety of different statistics based on user inputs. Using a Python graphical user interface, a user will select the units of measurement (meters, kilometers, or miles) along with inputing an integer representing (in the chosen units) the distance they are racing. 
 
 
 ### Project Sketch
@@ -19,7 +19,7 @@ This project will be an advanced running pace and split calculator which will ou
 
 
 ### How to Use 
-The user will  have the option of inputting either their desired pace per mile or overall time (or both!). There will also be a checkbox to specify whether the race is occuring on a 200m indoor track or a 400m outdoor one. Lastly, the user will select whether the distance they are inputting is present in track meets (such as the 1000m, 3200m, etc), so that the program can output per lap splits. Then, the user will click submit and a popup will appear with a variety of new calculated statistics. Firstly, the program will fill in per mile pace or total time if either were left blank in the intial input, then if the input value is one of the distances pre-designated as being common in track meets, there will also be an output of splits per lap, and other important statistics like halfway point times. If the distance entered is not in the list of pre-designated distances, then the program will still fill in per mile pace or total time if either were left blank in the intial input, but will not give per lap splits, just their splits per mile or km (depending on the selected units).
+The user will have the option of inputting either their desired pace per mile or overall time (or both!). There will also be a checkbox to specify whether the race is occuring on a 200m indoor track or a 400m outdoor one. Lastly, the user will select whether the distance they are inputting is present in track meets (such as the 1000m, 3200m, etc), so that the program can output per lap splits. Then, the user will click submit and a popup will appear with a variety of new calculated statistics. Firstly, the program will fill in per mile pace or total time if either were left blank in the intial input, then if the input value is one of the distances pre-designated as being common in track meets, there will also be an output of splits per lap, and other important statistics like halfway point times. If the distance entered is not in the list of pre-designated distances, then the program will still fill in per mile pace or total time if either were left blank in the intial input, but will not give per lap splits, just their splits per mile or km (depending on the selected units).
 
 
 #### Package and Python Version Requirements 
